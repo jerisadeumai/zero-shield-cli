@@ -1,6 +1,6 @@
 # Zero-Shield CLI: Agentic Security Copilot
 
-Zero-Shield is an AI-native security orchestrator designed for rapid cloud threat remediation. Built on the OODA loop (Observe-Orient-Decide-Act) framework, it utilizes GitHub Models (GPT-4o) and AWS Boto3 to translate natural language into immediate infrastructure action.
+**Zero-Shield** is an AI-native security orchestrator designed for rapid cloud threat remediation. Built on the deterministic OODA loop (Observe-Orient-Decide-Act) framework, it utilizes GitHub Models (GPT-4o) and AWS Boto3 to translate natural language into immediate infrastructure action.
 
 ## Key Features
 
@@ -10,67 +10,59 @@ Zero-Shield is an AI-native security orchestrator designed for rapid cloud threa
 * **Context-Aware:** Remembers previous commands to maintain an investigation flow.
 * **Hardened Defaults:** Built-in safeguards against LLM hallucinations regarding AWS regions.
 
+## System Architecture
+
+Zero-Shield acts as the autonomous reasoning engine between the Security Analyst and the Cloud Infrastructure.
+
+* **Observe:** Uses Boto3 to pull real-time telemetry and state data from AWS EC2.
+* **Orient:** GPT-4o analyzes the metadata, extracting instance IDs and inferring user intent.
+* **Decide:** The agent mathematically maps the intent to the correct execution tool (LIST, INSPECT, or QUARANTINE).
+* **Act:** Executes the API call to move the compromised instance into an isolated, restricted Security Group (`sg-0123456789abcdef0`).
+
 ## Installation and Setup
 
 ### 1. Prerequisites
-
 * Python 3.9+
-* AWS CLI configured with appropriate permissions (ec2:ModifyInstanceAttribute, ec2:DescribeInstances).
-* A GitHub Personal Access Token for GitHub Models.
+* A GitHub Personal Access Token (PAT) for the reasoning engine.
+* AWS IAM user credentials with `ec2:ModifyInstanceAttribute` and `ec2:DescribeInstances` permissions.
 
 ### 2. Clone and Install
-
 ```bash
-git clone https://github.com/jerisadeumai/zero-shield-cli
+git clone https://github.com/jerisadeumai/zero-shield-cli.git
 cd zero-shield-cli
 pip install -r requirements.txt
-
 ```
 
-### 3. Environment Configuration
+### 3. Environment & Authentication
 
-Create a .env file in the root directory:
+Zero-Shield utilizes the Boto3 Default Credential Provider Chain. By using a `.env` file, credentials are injected into the process environment variables, allowing Boto3 to automatically authenticate without hardcoded keys in the source code.
 
+Copy the template file to create your local environment:
+```bash
+cp .env.example .env
+```
+
+Open `.env` and insert your secure values:
 ```env
-GITHUB_TOKEN=your_github_model_token_here
-
+GITHUB_TOKEN=your_github_personal_access_token_here
+AWS_ACCESS_KEY_ID=your_aws_access_key_here
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key_here
+AWS_DEFAULT_REGION=us-east-1
 ```
+*(Note: If running inside a pre-authenticated environment such as AWS CloudShell, the AWS keys in `.env` may be left blank as the SDK will inherit the active session's IAM role).*
 
-## How to Use (Prompts to Try)
+## Execution (REPL)
 
-**Run the agent:**
-
+Launch the conversational terminal:
 ```bash
 python3 zero_shield_cli.py
-
 ```
 
-### Step 1: Observe (Discovery)
+## Tactical Prompts
 
-Scan your environment to see what is running.
-
-* **User:** "What instances are currently running in the us-east-1 region?"
-
-### Step 2: Orient (Investigation)
-
-Get security context on a specific target.
-
-* **User:** "Inspect the security groups and state for instance i-02c35a50d214cf886."
-
-### Step 3: Act (Remediation)
-
-Execute the "Nuclear Option" to secure your perimeter.
-
-* **User:** "This instance looks like it has been compromised by an SSH brute-force attack. Isolate it immediately."
-
-## Architecture
-
-Zero-Shield acts as the brain between the Security Analyst and the Cloud Infrastructure.
-
-* **Observe:** Uses Boto3 to pull real-time data from AWS EC2.
-* **Orient:** GPT-4o analyzes the metadata and user intent.
-* **Decide:** The agent selects the correct tool (LIST, INSPECT, or QUARANTINE).
-* **Act:** Executes the API call to move the instance into a restricted Security Group.
+* **Observe (Discovery):** "What instances are currently running in the us-east-1 region?"
+* **Orient (Investigation):** "Inspect the security groups and state for instance i-0123456789abcdef0."
+* **Act (Remediation):** "This instance looks like it has been compromised by an SSH brute-force attack. Isolate it immediately."
 
 ## Roadmap
 
@@ -78,4 +70,6 @@ Zero-Shield acts as the brain between the Security Analyst and the Cloud Infrast
 * **Automated Rollback:** One-click restoration after a "Clear" status is achieved.
 * **Slack/Teams Bot:** Move the REPL from the terminal to enterprise chat apps.
 * **IAM Analysis:** Agentic auditing of user permissions and roles.
-* **Consistency:** This README assumes your main script is named `zero_shield_cli.py`.
+
+---
+Copyright (c) 2026 JeriSadeuM AI | Licensed under the MIT License.

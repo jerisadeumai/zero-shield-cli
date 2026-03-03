@@ -1,3 +1,7 @@
+# Copyright (c) 2026 JeriSadeuM AI
+# Licensed under the MIT License.
+# For more information, visit: https://github.com/jerisadeumai/zero-shield-cli
+
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message="Boto3 will no longer support Python 3.9")
@@ -14,8 +18,8 @@ gh_client = OpenAI(
     api_key=os.environ.get("GITHUB_TOKEN")
 )
 
-# Target Security Group for isolation
-QUARANTINE_SG_ID = "sg-041a97ba55afb006e" 
+# Target Security Group for isolation loaded dynamically
+QUARANTINE_SG_ID = os.environ.get("QUARANTINE_SG_ID", "UNCONFIGURED")
 
 # 2. THE TOOLS (The Muscle / ACTION Phase)
 def get_client(service: str, region: str):
@@ -42,6 +46,8 @@ def tool_inspect_resource(instance_id: str, region: str) -> str:
     try:
         ec2 = get_client('ec2', region)
         res = ec2.describe_instances(InstanceIds=[instance_id])
+        if not res['Reservations']:
+            return "INSPECTION FAILED: Instance not found."
         inst = res['Reservations'][0]['Instances'][0]
         sg_names = [g['GroupName'] for g in inst['SecurityGroups']]
         return f"STATE: {inst['State']['Name']} | GROUPS: {', '.join(sg_names)}"
@@ -50,10 +56,13 @@ def tool_inspect_resource(instance_id: str, region: str) -> str:
 
 def tool_apply_quarantine(instance_id: str, region: str) -> str:
     """ACT: Executes the isolation of the resource."""
+    if QUARANTINE_SG_ID in ["UNCONFIGURED", "sg-your_quarantine_group_id_here", ""]:
+        return "ACTION FAILED: QUARANTINE_SG_ID is not configured in the .env file. Please set a valid Security Group ID."
+        
     try:
         ec2 = get_client('ec2', region)
         ec2.modify_instance_attribute(InstanceId=instance_id, Groups=[QUARANTINE_SG_ID])
-        return f"ACTION SUCCESS: {instance_id} isolated."
+        return f"ACTION SUCCESS: {instance_id} isolated into {QUARANTINE_SG_ID}."
     except Exception as e:
         return f"ACTION FAILED: {str(e)}"
 
@@ -63,6 +72,8 @@ def run_copilot_repl():
     print("--------------------------------------------------")
     print("ZERO-SHIELD DYNAMIC REPL ACTIVE")
     print("FRAMEWORK: OODA (Observe-Orient-Decide-Act)")
+    if QUARANTINE_SG_ID in ["UNCONFIGURED", "sg-your_quarantine_group_id_here", ""]:
+        print("[WARNING]: QUARANTINE_SG_ID is not configured. 'Act' phase will fail safely.")
     print("--------------------------------------------------")
     
     # Store history for context-aware ID extraction
@@ -107,17 +118,28 @@ def run_copilot_repl():
             intent, target, region, reply = data['intent'], data['target'], data['region'], data['reply']
             
             chat_history.append({"role": "assistant", "content": reply})
-
             print(f"\n[AI ORIENTATION]: {reply}")
 
+            result = ""
             if intent == "LIST":
-                print(f"[*] EXECUTION (Observe): {tool_list_resources(region)}")
+                result = tool_list_resources(region)
+                print(f"[*] EXECUTION (Observe): {result}")
+                
             elif intent == "INSPECT" and "i-" in str(target):
-                print(f"[*] EXECUTION (Observe): {tool_inspect_resource(target, region)}")
+                result = tool_inspect_resource(target, region)
+                print(f"[*] EXECUTION (Observe): {result}")
+                
             elif intent == "QUARANTINE" and "i-" in str(target):
-                print(f"[*] EXECUTION (Act): {tool_apply_quarantine(target, region)}")
+                result = tool_apply_quarantine(target, region)
+                print(f"[*] EXECUTION (Act): {result}")
+                
             else:
-                print("[*] STATUS: Waiting for a valid Instance ID (e.g., i-xxxx).")
+                result = "Waiting for a valid Instance ID (e.g., i-xxxx)."
+                print(f"[*] STATUS: {result}")
+            
+            # Feed the system execution result back into the chat history
+            if result:
+                chat_history.append({"role": "system", "content": f"SYSTEM_OBSERVATION: {result}"})
             
         except Exception as e:
             print(f"[SYSTEM ERROR]: {e}")
