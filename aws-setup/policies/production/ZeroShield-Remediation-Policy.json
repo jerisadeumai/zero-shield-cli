@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ZeroShieldQuarantine",
+      "Effect": "Allow",
+      "Action": "ec2:ModifyInstanceAttribute",
+      "Resource": "arn:aws:ec2:*:*:instance/*"
+    },
+    {
+      "Sid": "ZeroShieldIdentityKillswitch",
+      "Effect": "Allow",
+      "Action": "iam:UpdateAccessKey",
+      "Resource": "*"
+    }
+  ]
+}

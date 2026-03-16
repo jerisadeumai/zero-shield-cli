@@ -1,0 +1,50 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ZeroShieldFullAuditAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketAcl",
+        "s3:GetBucketPublicAccessBlock",
+        "iam:ListUsers",
+        "iam:ListRoles",
+        "iam:ListAccessKeys",
+        "iam:ListMFADevices",
+        "iam:ListAttachedRolePolicies",
+        "iam:GetInstanceProfile",
+        "rds:DescribeDBInstances",
+        "lambda:ListFunctions",
+        "cloudtrail:LookupEvents",
+        "ce:GetCostAndUsage",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricStatistics",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams",
+        "logs:GetLogEvents",
+        "kms:ListKeys",
+        "kms:DescribeKey",
+        "dynamodb:ListTables",
+        "dynamodb:DescribeTable",
+        "elasticfilesystem:DescribeFileSystems",
+        "wafv2:ListWebACLs",
+        "events:ListRules",
+        "events:DescribeRule",
+        "macie2:DescribeBuckets",
+        "ec2:DescribeInstances",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeNetworkAcls",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeIamInstanceProfileAssociations",
+        "ec2:GetConsoleOutput"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

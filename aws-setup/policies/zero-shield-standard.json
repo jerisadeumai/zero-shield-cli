@@ -1,0 +1,65 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InheritMinimalPolicy",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeNetworkAcls",
+        "ec2:DescribeIamInstanceProfileAssociations",
+        "ec2:GetConsoleOutput",
+        "iam:ListUsers",
+        "iam:ListRoles",
+        "iam:ListAccessKeys",
+        "iam:GetUser",
+        "iam:GetLoginProfile",
+        "iam:ListMFADevices",
+        "iam:ListAttachedRolePolicies",
+        "iam:GetInstanceProfile",
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketAcl",
+        "s3:GetBucketPublicAccessBlock",
+        "rds:DescribeDBInstances",
+        "dynamodb:ListTables",
+        "dynamodb:DescribeTable",
+        "elasticfilesystem:DescribeFileSystems",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams",
+        "logs:GetLogEvents",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricStatistics",
+        "cloudtrail:LookupEvents",
+        "events:ListRules",
+        "events:DescribeRule",
+        "guardduty:ListDetectors",
+        "guardduty:ListFindings",
+        "guardduty:GetFindings",
+        "kms:ListKeys",
+        "kms:DescribeKey",
+        "kms:GetKeyRotationStatus",
+        "wafv2:ListWebACLs",
+        "ce:GetCostAndUsage",
+        "pricing:GetProducts",
+        "lambda:ListFunctions",
+        "lambda:GetFunction"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "InstanceQuarantineCapability",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ModifyInstanceAttribute"
+      ],
+      "Resource": "arn:aws:ec2:*:*:instance/*"
+    }
+  ]
+}

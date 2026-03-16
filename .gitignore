@@ -1,1 +1,73 @@
+# Environment files
 .env
+.env.local
+.env.*.local
+
+# Session files (encrypted, user-specific)
+session_state.json
+session_kg.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+.env.backup.*
+
+# Development artifacts
+deployment-package/
+zero-shield-agent-v2.0.0-alpha/
+zero-shield-v2-dev/
+zero-shield-repo-clone/
+temp_zip_check/
+v2_payload_verify_reverted/
+*.zip
+
+# Logs
+*.log
+
+# Hypothesis testing artifacts (auto-generated, not for production)
+.hypothesis/
+
+# VS Code workspace files (user-specific)
+*.code-workspace
+
+# Development workflow artifacts (not for production)
+GIT_COMMIT_CHECKLIST.md
+
+# Kiro Assistant runtime artifacts (user-specific)
+.kiro/hooks/
+.kiro/skills/
+.kiro/steering/
