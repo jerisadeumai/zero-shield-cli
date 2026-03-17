@@ -1,7 +1,7 @@
 ﻿# Quick Start Guide
 
 > ⚠️ **DEVELOPMENT BRANCH WARNING**  
-> This guide covers the `agent-v2-dev` development branch. For production deployment, use the stable `main` branch.
+> This guide covers the `agent-v2-dev` development branch. This branch contains features not yet in the main branch.
 
 Get Zero-Shield CLI running in under 5 minutes.
 

@@ -2,7 +2,7 @@
 
 > ⚠️ **DEVELOPMENT BRANCH**  
 > Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
-> **Not recommended for production use. Use `main` branch for stable release.**
+> **Not recommended for production use. This branch contains features not yet in the main branch.**
 
 Set up Zero-Shield CLI on your local development machine.
 

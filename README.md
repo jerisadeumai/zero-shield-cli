@@ -2,7 +2,7 @@
 
 > ⚠️ **DEVELOPMENT BRANCH WARNING**  
 > This is the `agent-v2-dev` branch - **NOT PRODUCTION READY**  
-> For stable release, use the `main` branch  
+> This branch contains features not yet in the main branch  
 > Current Status: Development and Testing Only
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -26,8 +26,6 @@ This development branch contains:
 - 5-layer security hardening (development testing)
 - 32 AWS actions across 14 services
 - Comprehensive documentation and validation
-
-**For production use, please use the stable `main` branch.**
 
 ## Quick Start
 
@@ -240,7 +238,13 @@ show 7 day spend breakdown # Recent spending
   - 8 action detection tests ([tests/test_action_detection.py](tests/test_action_detection.py))
   - 66 comprehensive E2E tests ([tests/test_comprehensive_e2e.py](tests/test_comprehensive_e2e.py))
   - 35 security validation tests ([tests/test_security_fixes.py](tests/test_security_fixes.py))
-  - 44 property-based tests (tests/test_property_*.py)
+  - 44 property-based tests:
+    - [tests/test_property_aws_sanitization.py](tests/test_property_aws_sanitization.py)
+    - [tests/test_property_credential_redaction.py](tests/test_property_credential_redaction.py)
+    - [tests/test_property_final_batch.py](tests/test_property_final_batch.py)
+    - [tests/test_property_knowledge_graph.py](tests/test_property_knowledge_graph.py)
+    - [tests/test_property_remaining_batch1.py](tests/test_property_remaining_batch1.py)
+    - [tests/test_property_session_state.py](tests/test_property_session_state.py)
 - Platform-specific: Windows (4 tests skipped - file permission tests), Linux/Unix/macOS/CloudShell (all 152 tests run)
 
 ## Contributing

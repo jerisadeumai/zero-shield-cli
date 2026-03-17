@@ -254,13 +254,13 @@ git push origin agent-v2-dev
 ### Current Branch Structure
 
 ```
-main (stable)
-  └── agent-v2-dev (development preview)
+main (older stable release)
+  └── agent-v2-dev (active development - contains features not yet in main)
 ```
 
 ### Future Merge Strategy
 
-When agent-v2-dev is ready for release:
+When agent-v2-dev features are ready for release to main:
 
 ```bash
 # Switch to main

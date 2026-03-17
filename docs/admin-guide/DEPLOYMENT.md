@@ -2,7 +2,7 @@
 
 > ⚠️ **DEVELOPMENT BRANCH**  
 > Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
-> **Not recommended for production use. Use `main` branch for stable release.**
+> **This branch contains features not yet in the main branch.**
 
 **Last Updated:** March 17, 2026  
 **Version:** v2.0.0-dev
