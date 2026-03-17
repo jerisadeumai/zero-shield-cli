@@ -67,6 +67,9 @@ v2_payload_verify_reverted/
 # Development workflow artifacts (not for production)
 GIT_COMMIT_CHECKLIST.md
 
+# Additional temporary artifacts
+docs/workflows/GIT_PUSH_STRATEGY.md
+
 # Kiro Assistant runtime artifacts (user-specific)
 .kiro/hooks/
 .kiro/skills/
