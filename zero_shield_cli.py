@@ -1728,10 +1728,9 @@ def build_sys_msg(snapshot, kg, api_id="gpt-4o-mini", last_id=None):
     return base
 
 # ─── Action Detection ──────────────────────────────────────────────────────────
-# FIXED: Only match actions in [ACT] section to prevent false MULTIPLE_ACTIONS_DETECTED
-# when AI mentions action in [DECIDE] and then executes in [ACT]
+# FIXED: Simplified pattern to match both [ACT]: and direct [ACTION:] formats
 ACTION_PATTERN = re.compile(
-    r'\[ACT\]:\s*(?:[^[]*?)?\[ACTION:('
+    r'\[ACTION:('
     r'LIST_SGS|LIST|SG_RULES|INSPECT|VPC_INFO|LOGS|'
     r'EC2_VOLUMES|EC2_SNAPSHOTS|EC2_KEYPAIRS|EC2_NACLS|'
     r'IAM_CHECK|IAM_USERS|IAM_ROLES|IAM_KEYS|'
@@ -1741,7 +1740,7 @@ ACTION_PATTERN = re.compile(
     r'CLOUDTRAIL|COST|COST_EXPLORER|GUARDDUTY|'
     r'KMS_KEYS|DYNAMODB_LIST|EFS_LIST|WAF_WEBACLS|'
     r'TARGET|MODIFY_SG|QUARANTINE|DEACTIVATE_ACCESS_KEY)'
-    r'(?::|\s+)?([^\]]*)\]',
+    r'(?::([^\]]*))?\]',
     re.IGNORECASE | re.DOTALL
 )
 
@@ -1764,7 +1763,7 @@ def detect_action(text):
     # Parameter validation: Sanitize to prevent injection
     if param:
         # Remove any structural characters that could be used for injection
-        param = re.sub(r'[;\|&$`\n\r]', '', param)
+        param = re.sub(r'[;\|&<>\n\r]', '', param)
         # Limit parameter length
         param = param[:100]
     

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Zero-Shield CLI Deployment Script for AWS CloudShell
 # Version: v2.0.0-dev
-# Date: March 16, 2026
+# Date: March 17, 2026
 # Branch: agent-v2-dev
 
 set -e  # Exit on error

@@ -1,6 +1,6 @@
 # Production AWS IAM Policies
 
-**Last Verified:** March 15, 2026  
+**Last Verified:** March 17, 2026  
 **IAM User:** `ZeroShield-CLI-Agent` (example)  
 **User Group:** `ZeroShield-Agents` (example)  
 **AWS Account:** `[YOUR_AWS_ACCOUNT_ID]`

@@ -1,6 +1,10 @@
 ﻿# Zero-Shield CLI: Technical Architecture Manifesto (v2.0.0-dev)
 
-**Last Updated:** March 16, 2026  
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
+> **Not recommended for production use. Use `main` branch for stable release.**
+
+**Last Updated:** March 17, 2026  
 **Copyright © 2026 Jeri L3D | JeriSadeuM | All Rights Reserved**
 **License:** MIT License
 **Repository:** https://github.com/jerisadeumai/zero-shield-cli  
@@ -10,7 +14,7 @@
 
 This document details the advanced engineering philosophy, memory management, and API resilience mechanisms that power the Zero-Shield Agentic Engine.
 
-**Formal Specification:** This architecture is backed by a comprehensive formal specification with 50 validated requirements, 30 correctness properties, and 131 tests (100% pass rate). See [specification documentation](.kiro/specs/zero-shield-cli-comprehensive-spec/) for complete requirements, design properties, and property-based testing implementation.
+**Formal Specification:** This architecture is backed by a comprehensive formal specification with 50 validated requirements, 44 correctness properties, and 152 tests (97.4% pass rate). See [specification documentation](.kiro/specs/zero-shield-cli-comprehensive-spec/) for complete requirements, design properties, and property-based testing implementation.
 
 ---
 

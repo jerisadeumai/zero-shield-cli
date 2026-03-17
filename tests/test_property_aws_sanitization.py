@@ -11,6 +11,7 @@ _sanitize_aws_tag() must remove all injection vectors.
 
 import os
 import sys
+import re
 from hypothesis import given, strategies as st, settings
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -69,4 +70,5 @@ if __name__ == "__main__":
         print("\n✓ All property tests passed!")
     except Exception as e:
         print(f"✗ Property test failed: {e}")
-        sys.exit(1)
+        if __name__ == "__main__":
+            sys.exit(1)

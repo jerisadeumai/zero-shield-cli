@@ -207,4 +207,5 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"✗ Property test failed: {e}")
-        sys.exit(1)
+        if __name__ == "__main__":
+            sys.exit(1)

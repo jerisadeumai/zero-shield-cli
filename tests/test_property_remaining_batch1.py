@@ -209,4 +209,5 @@ if __name__ == "__main__":
         print("\n✓ All batch 1 tests passed!")
     except Exception as e:
         print(f"✗ Test failed: {e}")
-        sys.exit(1)
+        if __name__ == "__main__":
+            sys.exit(1)

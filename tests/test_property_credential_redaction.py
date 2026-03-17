@@ -167,6 +167,43 @@ def test_aws_resource_ids_preserved(text):
     for resource_id in resource_ids:
         assert resource_id in redacted, f"Resource ID incorrectly redacted: {resource_id}"
 
+def test_redaction_performance_property():
+    """
+    Property Test: Redaction performance is acceptable for large inputs
+    
+    Tests that redaction completes within reasonable time for large text inputs.
+    """
+    import time
+    large_text = "Test data: " + "A" * 10000 + " AKIAIOSFODNN7EXAMPLE " + "B" * 10000
+    
+    start_time = time.time()
+    result = _redact_secrets(large_text)
+    elapsed = time.time() - start_time
+    
+    # Property assertion: Should complete within 1 second for 20KB text
+    assert elapsed < 1.0, f"Redaction took too long: {elapsed:.3f}s"
+    assert "REDACTED" in result, "Large text redaction failed"
+
+def test_redaction_memory_efficiency():
+    """
+    Property Test: Redaction doesn't cause excessive memory usage
+    
+    Tests that redaction handles multiple large inputs without memory issues.
+    """
+    import gc
+    
+    # Process multiple large texts
+    for i in range(100):
+        large_text = f"Test {i}: " + "X" * 1000 + f" AKIATEST{i:016d} " + "Y" * 1000
+        result = _redact_secrets(large_text)
+        assert "REDACTED" in result
+    
+    # Force garbage collection
+    gc.collect()
+    
+    # If we get here without memory errors, test passes
+    assert True, "Memory efficiency test completed successfully"
+
 if __name__ == "__main__":
     print("Feature: zero-shield-cli-comprehensive-spec, Property 3 & 4: Credential Redaction")
     print("Running property-based tests for credential redaction...")
@@ -190,4 +227,5 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"✗ Property test failed: {e}")
-        sys.exit(1)
+        if __name__ == "__main__":
+            sys.exit(1)

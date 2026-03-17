@@ -1,6 +1,6 @@
 # Security Administration Guide
 
-**Last Updated:** March 15, 2026  
+**Last Updated:** March 17, 2026  
 **Version:** v2.0.0-dev  
 **Specification:** [Security Requirements](.kiro/specs/zero-shield-cli-comprehensive-spec/requirements.md)
 
@@ -14,7 +14,7 @@ Zero-Shield CLI implements multiple security layers validated by formal specific
 - **Requirement 13:** Human-in-the-Loop confirmations (10 acceptance criteria)
 - **Requirement 17:** XOR encryption for session files (10 acceptance criteria)
 
-All security features are validated by property-based tests with 100% pass rate.
+All security features are validated by property-based tests with 97.4% pass rate (148 passing, 4 skipped on Windows).
 
 ---
 

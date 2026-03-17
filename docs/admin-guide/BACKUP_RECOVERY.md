@@ -1,6 +1,9 @@
 # Backup and Recovery Guide
 
-**Last Updated:** March 15, 2026  
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Not Production Ready
+
+**Last Updated:** March 17, 2026  
 **Version:** v2.0.0-dev
 
 ## Overview

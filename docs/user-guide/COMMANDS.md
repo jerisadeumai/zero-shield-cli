@@ -1,8 +1,12 @@
 ﻿# Zero-Shield CLI Command Reference
 
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
+> **Not recommended for production use. Use `main` branch for stable release.**
+
 Complete reference for all AWS actions and system commands available in Zero-Shield CLI.
 
-**Specification Compliance:** This command reference is validated against the [comprehensive specification](.kiro/specs/zero-shield-cli-comprehensive-spec/) with 50 requirements, 30 correctness properties, and 131 tests (100% pass rate). All 32 AWS actions are formally specified and property-tested.
+**Specification Compliance:** This command reference is validated against the [comprehensive specification](.kiro/specs/zero-shield-cli-comprehensive-spec/) with 50 requirements, 44 correctness properties, and 152 tests (97.4% pass rate). All 32 AWS actions are formally specified and property-tested.
 
 **Note:** All example resource IDs (like `i-0123456789abcdef0`, `sg-041a97ba55afb006e`) are placeholders. Replace them with your actual AWS resource IDs.
 

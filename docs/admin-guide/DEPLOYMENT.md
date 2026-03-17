@@ -1,6 +1,10 @@
 # Deployment Guide
 
-**Last Updated:** March 16, 2026  
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
+> **Not recommended for production use. Use `main` branch for stable release.**
+
+**Last Updated:** March 17, 2026  
 **Version:** v2.0.0-dev
 
 ## Overview
@@ -258,13 +262,60 @@ python3 zero_shield_cli.py
 # Type 'exit' to quit after verification
 ```
 
-### Smoke Tests
+### Test Suite Validation
 ```bash
-# Run security tests
-python3 tests/test_security_fixes.py
+# Run complete test suite to validate deployment
+python3 -m pytest tests/ -v
 
-# Run integration tests
-python3 tests/test_comprehensive_e2e.py
+# Expected output: 152 tests collected, 148 passed, 4 skipped
+# Pass rate: 97.4% (4 Windows file permission tests skipped)
+```
+
+**Expected test output:**
+```
+================================= test session starts =================================
+platform linux -- Python 3.9.16, pytest-7.4.0, pluggy-1.0.0 -- python3
+cachedir: .pytest_cache
+rootdir: /path/to/zero-shield-cli
+collected 152 tests
+
+tests/test_action_detection.py::test_action_detection_basic PASSED                [ 5%]
+tests/test_comprehensive_e2e.py::test_ec2_instance_listing PASSED                [15%]
+tests/test_property_final_batch.py::TestProperty16ModelSelectionValidation::test_out_of_range_model_numbers_rejected PASSED [55%]
+tests/test_security_fixes.py::test_file_permissions_unix PASSED                  [97%]
+=============================== 148 passed, 4 skipped in 12.45s ===============================
+```
+
+### Smoke Tests by Category
+```bash
+# Test action detection (8 tests)
+python3 -m pytest tests/test_action_detection.py -v
+
+# Test security validation (35 tests)
+python3 -m pytest tests/test_security_fixes.py -v
+
+# Test comprehensive E2E (66 tests)
+python3 -m pytest tests/test_comprehensive_e2e.py -v
+
+# Test property-based validation (44 tests across 6 files)
+python3 -m pytest tests/test_property_*.py -v
+```
+
+### Test Troubleshooting
+```bash
+# If tests fail, check common issues:
+
+# 1. Missing dependencies
+pip install -r requirements.txt
+
+# 2. AWS credential issues
+aws sts get-caller-identity
+
+# 3. Environment configuration
+cat .env | grep -E "GITHUB_TOKEN|AWS_"
+
+# 4. File permissions (Unix/Linux)
+chmod 600 .env
 ```
 
 ---

@@ -1,6 +1,10 @@
 ﻿# Zero-Shield: OODA Reasoning Framework (v2.0.0-dev)
 
-**Last Updated:** March 16, 2026  
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
+> **Not recommended for production use. Use `main` branch for stable release.**
+
+**Last Updated:** March 17, 2026  
 **Copyright © 2026 Jeri L3D | JeriSadeuM | All Rights Reserved**
 **License:** MIT License
 **Repository:** https://github.com/jerisadeumai/zero-shield-cli  

@@ -1,11 +1,33 @@
 ﻿# Zero-Shield CLI: AI-Native AWS Terminal Agent
 
+> ⚠️ **DEVELOPMENT BRANCH WARNING**  
+> This is the `agent-v2-dev` branch - **NOT PRODUCTION READY**  
+> For stable release, use the `main` branch  
+> Current Status: Development and Testing Only
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![AWS](https://img.shields.io/badge/AWS-Compatible-orange.svg)](https://aws.amazon.com/)
-[![Security Hardened](https://img.shields.io/badge/Security-Hardened-green.svg)](#security)
+[![Development Branch](https://img.shields.io/badge/Status-Development-red.svg)](#development-status)
 
 **Zero-Shield CLI** is an AI-native security orchestrator that translates natural language into immediate AWS security actions. Built for security analysts, DevSecOps engineers, and incident responders who need rapid cloud threat investigation and remediation.
+
+## Development Status
+
+**Branch:** agent-v2-dev  
+**Version:** v2.0.0-dev  
+**Status:** Development and Testing Only  
+**Last Updated:** March 17, 2026  
+
+**⚠️ NOT RECOMMENDED FOR PRODUCTION USE**
+
+This development branch contains:
+- 152 automated tests (97.4% pass rate, 4 skipped on Windows)
+- 5-layer security hardening (development testing)
+- 32 AWS actions across 14 services
+- Comprehensive documentation and validation
+
+**For production use, please use the stable `main` branch.**
 
 ## Quick Start
 
@@ -108,13 +130,13 @@ Future releases will include additional deployment methods:
 
 ## Security & Trust
 
-Zero-Shield has undergone extensive security hardening:
+Zero-Shield has undergone extensive security hardening (Development Testing):
 
-- **3,069 Lines Analyzed** - Zero critical bugs found during development
-- **100% Test Coverage** - 66 comprehensive + 35 security tests
-- **5-Layer Credential Redaction** - AWS credentials never logged
-- **Encrypted State Files** - Session data protected at rest
-- **Human-in-the-Loop** - Destructive actions require confirmation
+- **3,069 Lines Analyzed** - Development Testing: Zero critical bugs found
+- **100% Code Coverage (Development Testing)** - 152 tests with 97.4% pass rate (148 passing, 4 skipped on Windows)
+- **5-Layer Credential Redaction (Development Testing)** - AWS credentials never logged
+- **Encrypted State Files (Development Testing)** - Session data protected at rest
+- **Human-in-the-Loop (Development Testing)** - Destructive actions require confirmation
 
 [View detailed validation reports →](validation/reports/)
 
@@ -124,8 +146,8 @@ Zero-Shield CLI is built on a comprehensive formal specification with property-b
 
 - **[50 Validated Requirements](.kiro/specs/zero-shield-cli-comprehensive-spec/requirements.md)** - Complete system requirements using EARS protocol
 - **[30 Correctness Properties](.kiro/specs/zero-shield-cli-comprehensive-spec/design.md)** - Formal properties with property-based testing
-- **[131 Total Tests](.kiro/specs/zero-shield-cli-comprehensive-spec/tasks.md)** - 35 security + 66 comprehensive + 30 property-based tests
-- **100% Test Pass Rate** - All tests passing with zero failures
+- **[152 Total Tests](.kiro/specs/zero-shield-cli-comprehensive-spec/tasks.md)** - 8 action detection + 66 comprehensive + 35 security + 44 property-based tests
+- **97.4% Test Pass Rate** - 148 tests passing, 4 skipped (Windows file permission tests)
 - **Property-Based Testing** - Universal correctness guarantees using Hypothesis library
 - **Round-Trip Integrity** - Session state and Knowledge Graph persistence validated
 - **Security Properties** - Credential redaction, prompt injection prevention, HITL confirmations
@@ -148,7 +170,7 @@ The `agent-v2-dev` branch was developed extensively using **[Kiro](https://kiro.
 **Kiro-Powered Development Artifacts:**
 - **[Comprehensive Specification](.kiro/specs/zero-shield-cli-comprehensive-spec/)** - 50 requirements, 30 correctness properties, complete implementation plan
 - **[Custom Steering Rules](.kiro/steering/)** - Project-specific AI guidance for product, technology stack, structure, and communication
-- **Property-Based Testing** - 30 automated correctness properties using Hypothesis library
+- **Property-Based Testing** - 44 automated correctness properties using Hypothesis library
 - **Documentation Generation** - Automated synchronization between code and documentation
 - **Quality Assurance** - Systematic validation of all 50 requirements and 30 properties
 
@@ -210,25 +232,27 @@ show 7 day spend breakdown # Recent spending
 **Status:** Development Branch - Not Yet Released  
 **Branch:** agent-v2-dev  
 **Last Main Branch Commit:** March 3, 2026 (commit: d3754fc)  
-**Development Branch Updates:** March 13-16, 2026  
+**Development Branch Updates:** March 13-17, 2026  
 
 **Development Quality Metrics:**
-- 3,069 lines of code analyzed and certified bug-free
-- 66/66 comprehensive tests passing (100%)
-- 35/35 security tests passing (100%)
-- 5 critical security fixes applied and validated
-- 99.0% development confidence score
+- 3,069 lines of code in main script ([zero_shield_cli.py](zero_shield_cli.py))
+- 152 total tests with 97.4% pass rate (148 passing, 4 skipped on Windows)
+  - 8 action detection tests ([tests/test_action_detection.py](tests/test_action_detection.py))
+  - 66 comprehensive E2E tests ([tests/test_comprehensive_e2e.py](tests/test_comprehensive_e2e.py))
+  - 35 security validation tests ([tests/test_security_fixes.py](tests/test_security_fixes.py))
+  - 44 property-based tests (tests/test_property_*.py)
+- Platform-specific: Windows (4 tests skipped - file permission tests), Linux/Unix/macOS/CloudShell (all 152 tests run)
 
 ## Contributing
 
-We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
+Welcoming contributions! See the [Contributing Guide](CONTRIBUTING.md) for details.
 
 **Quick contribution setup:**
 ```bash
 git clone https://github.com/jerisadeumai/zero-shield-cli.git
 cd zero-shield-cli
 pip install -r requirements.txt
-python3 test_comprehensive_e2e.py # Run tests
+python3 -m pytest tests/ # Run all 152 tests
 ```
 
 ## Support

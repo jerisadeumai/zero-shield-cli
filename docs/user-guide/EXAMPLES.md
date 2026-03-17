@@ -1,5 +1,9 @@
 ﻿# Real-World Usage Examples
 
+> ⚠️ **DEVELOPMENT BRANCH**  
+> Version: v2.0.0-dev | Status: Development Only | Last Updated: March 17, 2026  
+> **Not recommended for production use. Use `main` branch for stable release.**
+
 Practical scenarios showing how to use Zero-Shield CLI for common security operations.
 
 **Important:** All resource IDs in these examples (like `i-0123456789abcdef0`, `sg-041a97ba55afb006e`) are placeholders. Replace them with your actual AWS resource IDs when following these examples.
